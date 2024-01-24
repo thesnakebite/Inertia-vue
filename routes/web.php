@@ -17,7 +17,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/chirps', function (){
-    return Inertia::render('Chirps/Index');
+    return Inertia::render('Chirps/Index', [
+        'title' => 'Chirps Index',
+        'subtitle' => 'From PHP to JS'
+    ]);
 });
 
 Route::get('/', function () {
