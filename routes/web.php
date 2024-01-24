@@ -21,7 +21,10 @@ Route::get('/chirps', function (){
         'title' => 'Chirps Index',
         'subtitle' => 'From PHP to JS'
     ]);
-})->middleware('auth');
+})
+    ->middleware('auth')
+    ->name('chirps.index');
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
