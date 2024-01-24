@@ -1,5 +1,6 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+    import { Head } from '@inertiajs/vue3'
 
     defineProps([
         'title', 
@@ -8,6 +9,9 @@
 </script>
 
 <template>
+    <Head title="Chirps">
+        <meta name="description" content="Chirps description" />
+    </Head>
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ title }}</h2>
