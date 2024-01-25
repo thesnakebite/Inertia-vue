@@ -1,39 +1,22 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-    import { Head } from '@inertiajs/vue3'
+    import { Head, useForm } from '@inertiajs/vue3'
     import InputError from '@/Components/InputError.vue'
     import PrimaryButton from '@/Components/PrimaryButton.vue'
-    import { ref } from 'vue'
-
 
     defineProps([
         'title', 
         'subtitle'
     ])
 
-    const message = ref('')
-    const errors = ref({})
-    const processing = ref(false)
+    const form = useForm({
+        message: '',
+    })
 
     function submit() {
-        processing.value = true
-
-        axios.post(route('chirps.store'), { message: message.value})
-            .then((res) => {
-                console.log(res.data)
-                message.value = '' //Reseteamos el valor del campo a una cadena vacia
-                errors.value = {} // Borramos el mensajes de error en caso de que exista
-            })
-            .catch((error) => {
-                if (error.response.status === 422) {
-                    errors.value = error.response.data.errors
-                    return //Retornamos para que no se ejecute el console.error
-                }
-
-                console.error(error.response.data.message);
-            }).finally(() => {
-                processing.value = false
-            })
+        form.post(route('chirps.store'), {
+            onSuccess: () => form.reset(),
+        })
     }
 </script>
 
@@ -52,17 +35,17 @@
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <form @submit.prevent="submit">
                             <textarea
-                                v-model="message"
+                                v-model="form.message"
                                 placeholder="What's on your mind?"
                                 class="block w-full rounded-md border-gray-700 focus:border-none bg-white dark:bg-gray-800 shadow-sm focus:bg-gray-700 dark:focus:bg-gray-800 active:bg-white dark:active:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                             >
                             </textarea>
-                            <InputError :message="errors.message && errors.message[0]" class="mt-2" />
+                            <InputError :message="form.errors.message" class="mt-2" />
 
-                            <PrimaryButton :disabled="processing" 
+                            <PrimaryButton :disabled="form.processing" 
                                             class="mt-2"
                             >
-                                {{ processing ? 'Enviando...' : 'Chirps' }}
+                                {{ form.processing ? 'Enviando...' : 'Chirps' }}
                             </PrimaryButton>
                         </form>
                     </div>
