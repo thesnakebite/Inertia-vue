@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Chirps/Index', [
+            'title' => 'Chirps Index',
+            'subtitle' => 'From PHP to JS'
+        ]);
     }
 
     /**
@@ -28,7 +32,7 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'ChirpsController@store';
     }
 
     /**
