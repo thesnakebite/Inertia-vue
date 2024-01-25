@@ -32,7 +32,7 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        return 'ChirpsController@store';
+        return $request->all();
     }
 
     /**
