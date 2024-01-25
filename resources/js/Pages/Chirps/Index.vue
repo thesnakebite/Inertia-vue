@@ -13,12 +13,16 @@
 
     const message = ref('')
     const errors = ref({})
+    const processing = ref(false)
 
     function submit() {
+        processing.value = true
+
         axios.post(route('chirps.store'), { message: message.value})
             .then((res) => {
                 console.log(res.data)
-                message.value = ''
+                message.value = '' //Reseteamos el valor del campo a una cadena vacia
+                errors.value = {} // Borramos el mensajes de error en caso de que exista
             })
             .catch((error) => {
                 if (error.response.status === 422) {
@@ -27,6 +31,8 @@
                 }
 
                 console.error(error.response.data.message);
+            }).finally(() => {
+                processing.value = false
             })
     }
 </script>
@@ -53,7 +59,11 @@
                             </textarea>
                             <InputError :message="errors.message && errors.message[0]" class="mt-2" />
 
-                            <PrimaryButton class="mt-2">Chirps</PrimaryButton>
+                            <PrimaryButton :disabled="processing" 
+                                            class="mt-2"
+                            >
+                                {{ processing ? 'Enviando...' : 'Chirps' }}
+                            </PrimaryButton>
                         </form>
                     </div>
                 </div>
