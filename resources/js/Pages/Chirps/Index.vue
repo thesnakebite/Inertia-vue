@@ -5,8 +5,7 @@
     import PrimaryButton from '@/Components/PrimaryButton.vue'
 
     defineProps([
-        'title', 
-        'subtitle'
+        'title',
     ])
 
     const form = useForm({
@@ -16,6 +15,7 @@
     function submit() {
         form.post(route('chirps.store'), {
             onSuccess: () => form.reset(),
+            preserveState: false,
         })
     }
 </script>
