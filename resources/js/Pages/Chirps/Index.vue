@@ -1,9 +1,10 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
     import { Head } from '@inertiajs/vue3'
+    import InputError from '@/Components/InputError.vue'
     import PrimaryButton from '@/Components/PrimaryButton.vue'
     import { ref } from 'vue'
-import axios from 'axios';
+
 
     defineProps([
         'title', 
@@ -11,6 +12,7 @@ import axios from 'axios';
     ])
 
     const message = ref('')
+    const errors = ref({})
 
     function submit() {
         axios.post(route('chirps.store'), { message: message.value})
@@ -19,6 +21,11 @@ import axios from 'axios';
                 message.value = ''
             })
             .catch((error) => {
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors
+                    return //Retornamos para que no se ejecute el console.error
+                }
+
                 console.error(error.response.data.message);
             })
     }
@@ -44,6 +51,8 @@ import axios from 'axios';
                                 class="block w-full rounded-md border-gray-700 focus:border-none bg-white dark:bg-gray-800 shadow-sm focus:bg-gray-700 dark:focus:bg-gray-800 active:bg-white dark:active:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                             >
                             </textarea>
+                            <InputError :message="errors.message && errors.message[0]" class="mt-2" />
+
                             <PrimaryButton class="mt-2">Chirps</PrimaryButton>
                         </form>
                     </div>
