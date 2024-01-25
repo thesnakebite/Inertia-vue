@@ -32,7 +32,9 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        return $request->user()->chirps()->create([
+            'message' => $request->input('message')
+        ]);
     }
 
     /**

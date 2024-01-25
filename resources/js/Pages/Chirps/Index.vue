@@ -18,8 +18,8 @@ import axios from 'axios';
                 console.log(res.data)
                 message.value = ''
             })
-            .catch(() => {
-                $page.flash('Something went wrong!')
+            .catch((error) => {
+                console.error(error.response.data.message);
             })
     }
 </script>
