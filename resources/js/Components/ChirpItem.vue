@@ -14,7 +14,7 @@
             <div class="flex justify-between items-center">
                 <div>
                     <span class="text-gray-800 dark:text-gray-200">
-                        {{ chirp.user.name}}
+                        <!-- {{ chirp.user.name}} -->
                     </span>
                     <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">
                         {{ chirp.created_at }}

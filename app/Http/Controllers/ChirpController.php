@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ChirpResource;
 use Inertia\Inertia;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
@@ -13,12 +14,16 @@ class ChirpController extends Controller
      */
     public function index()
     {
+        $chirp = Chirp::with('user:id,name')
+            ->latest()
+            ->get();
+
+        // return ChirpResource::collection($chirp);
+
         return Inertia::render('Chirps/Index', [
             // Pasamos solo el nombre de usuario
             // para no enviar info sensible al front
-            'chirps' => Chirp::with('user:id,name')
-                ->latest()
-                ->get()
+            'chirps' => ChirpResource::collection($chirp),
         ]);
     }
 
