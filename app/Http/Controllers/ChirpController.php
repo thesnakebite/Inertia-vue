@@ -21,8 +21,6 @@ class ChirpController extends Controller
         // return ChirpResource::collection($chirp);
 
         return Inertia::render('Chirps/Index', [
-            // Pasamos solo el nombre de usuario
-            // para no enviar info sensible al front
             'chirps' => ChirpResource::collection($chirp),
         ]);
     }
