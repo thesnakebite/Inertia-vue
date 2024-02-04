@@ -14,7 +14,11 @@ class ChirpController extends Controller
     public function index()
     {
         return Inertia::render('Chirps/Index', [
-            'title' => 'Chirps Index',
+            // Pasamos solo el nombre de usuario
+            // para no enviar info sensible al front
+            'chirps' => Chirp::with('user:id,name')
+                ->latest()
+                ->get()
         ]);
     }
 

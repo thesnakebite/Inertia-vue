@@ -3,9 +3,10 @@
     import { Head, useForm } from '@inertiajs/vue3'
     import InputError from '@/Components/InputError.vue'
     import PrimaryButton from '@/Components/PrimaryButton.vue'
+    import ChirpItem from '@/Components/ChirpItem.vue'
 
     defineProps([
-        'title',
+        'chirps',
     ])
 
     const form = useForm({
@@ -26,7 +27,7 @@
     </Head>
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ title }}</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Chirps Index</h2>
         </template>
 
         <div class="py-12">
@@ -49,6 +50,15 @@
                             </PrimaryButton>
                         </form>
                     </div>
+                </div>
+                <!-- Listar registros -->
+                <div class="mt-6 bg-white dark:bg-gray-800 shadow-md rounded-lg divide-y divide-black dark:divide-slate-700">
+
+                    <ChirpItem 
+                        v-for="chirp in chirps" 
+                        :key="`chirps-${chirp.id}`" 
+                        :chirp="chirp"
+                    />
                 </div>
             </div>
         </div>
