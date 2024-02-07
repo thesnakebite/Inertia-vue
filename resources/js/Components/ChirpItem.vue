@@ -17,7 +17,17 @@
                         {{ chirp.user.name}}
                     </span>
                     <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                        {{ chirp.created_at }}
+                        {{
+                            // new Date(chirp.created_at).toLocaleDateString('es', {
+                            //     year: 'numeric',
+                            //     month: 'long',
+                            //     day: 'numeric',
+                            //     hour: 'numeric',
+                            //     minute: 'numeric',
+                            //     second: 'numeric'
+                            // })
+                            chirp.created_at
+                        }}
                     </small>
                 </div>
             </div>
