@@ -1,6 +1,7 @@
 <script setup>
     import Dropdown from "@/Components/Dropdown.vue"
     import DropdownButton from "@/Components/DropdownButton.vue"
+    import ChirpForm from "@/Components/ChirpForm.vue"
     import { ref } from 'vue'
 
     const editing = ref(false);
@@ -35,12 +36,17 @@
                             chirp.created_at
                         }}
                     </small>
+                    <small v-if="chirp.edited" class="text-sm text-rose-500">
+                        &middot; edited
+                    </small>
                 </div>
             </div>
 
-            <textarea v-if="editing">
-                {{ chirp.message }}
-            </textarea>
+            <ChirpForm v-if="editing" 
+                       :chirp="chirp" 
+                       @cancel="editing = false" 
+                       class="mt-4 text-gray-900 dark:text-gray-100" 
+            />
             <p v-else class="mt-4 text-lg text-gray-900 dark:text-gray-100">
                 {{ chirp.message }}
             </p>

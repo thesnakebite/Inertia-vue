@@ -38,13 +38,13 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated= $request->validate([
             'message' => ['required', 'max:255'],
         ]);
 
-        $request->user()->chirps()->create([
-            'message' => $request->input('message')
-        ]);
+        $request->user()->chirps()->create(
+            $validated
+        );
 
         return back()->with('status', __('Chirp created!'));
     }
@@ -70,7 +70,15 @@ class ChirpController extends Controller
      */
     public function update(Request $request, Chirp $chirp)
     {
-        //
+        $validated= $request->validate([
+            'message' => ['required', 'max:255'],
+        ]);
+
+        $chirp->update(
+            $validated
+        );
+
+        return back()->with('status', __('Chirp updated!'));
     }
 
     /**
