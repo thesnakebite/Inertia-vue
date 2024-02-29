@@ -54,7 +54,7 @@
             </p>
         </div>
 
-        <Dropdown>
+        <Dropdown v-if="chirp.user.id === $page.props.auth.user.id">
             <template #trigger>
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-emerald-500">

@@ -70,6 +70,8 @@ class ChirpController extends Controller
      */
     public function update(Request $request, Chirp $chirp)
     {
+        $this->authorize('update', $chirp);
+
         $validated= $request->validate([
             'message' => ['required', 'max:255'],
         ]);
@@ -86,6 +88,8 @@ class ChirpController extends Controller
      */
     public function destroy(Chirp $chirp)
     {
+        $this->authorize('update', $chirp);
+
         $chirp->delete();
 
         return back()->with('status', __('Chirp deleted!'));
