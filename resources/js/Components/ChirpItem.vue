@@ -2,6 +2,8 @@
     import Dropdown from "@/Components/Dropdown.vue"
     import DropdownButton from "@/Components/DropdownButton.vue"
     import ChirpForm from "@/Components/ChirpForm.vue"
+    import DropdownLink from "@/Components/DropdownLink.vue"
+    
     import { ref } from 'vue'
 
     const editing = ref(false);
@@ -36,7 +38,7 @@
                             chirp.created_at
                         }}
                     </small>
-                    <small v-if="chirp.edited" class="text-sm text-rose-500">
+                    <small v-if="chirp.edited" class="text-sm text-amber-500">
                         &middot; edited
                     </small>
                 </div>
@@ -61,7 +63,19 @@
                 </button>
             </template>
             <template #content>
-                <DropdownButton @click="editing=true">Editar</DropdownButton>
+                <DropdownButton 
+                    @click="editing=true"
+                >
+                    Editar
+                </DropdownButton>
+                <DropdownLink
+                    as="button"
+                    :href="route('chirps.destroy', chirp.id)"
+                    method="delete"
+                    :preserve-state="false"
+                >
+                    Delete
+                </DropdownLink>
             </template>
 
         </Dropdown>

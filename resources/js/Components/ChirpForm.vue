@@ -50,15 +50,18 @@
         </textarea>
         <InputError :message="form.errors.message" class="mt-2" />
 
-        <PrimaryButton :disabled="form.processing" 
-                        class="mt-2"
+        <PrimaryButton 
+            :disabled="form.processing" 
+            class="mt-2 bg-rose-500 dark:bg-emerald-600 dark:text-white"
         >
             {{ form.processing ? 'Enviando...' : 'Chirps' }}
         </PrimaryButton>
-        <SecondaryButton v-if="chirp?.id" 
-                         @click="$emit('cancel')" 
-                         class="ml-2">
-                         Cancel
+        <SecondaryButton 
+            v-if="chirp?.id" 
+            @click="$emit('cancel')" 
+            class="ml-2"
+        >
+            Cancel
         </SecondaryButton>
     </form>
 </template>

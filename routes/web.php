@@ -22,7 +22,7 @@ use Inertia\Inertia;
 //     ->name('chirps.index');
 
 Route::resource('chirps', ChirpController::class)
-    ->only('index', 'store', 'update')
+    ->only('index', 'store', 'update', 'destroy')
     ->middleware('auth');
 
 
