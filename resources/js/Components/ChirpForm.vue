@@ -45,14 +45,15 @@
         <textarea
             v-model="form.message"
             placeholder="What's on your mind?"
-            class="block w-full rounded-md border-gray-700 focus:border-none bg-white dark:bg-gray-800 shadow-sm focus:bg-gray-700 dark:focus:bg-gray-800 active:bg-white dark:active:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+            class="block w-full rounded-md border-gray-700 focus:border-none bg-white dark:bg-gray-800 text-black dark:text-gray-200 shadow-sm focus:bg-white dark:focus:bg-gray-800 active:bg-white dark:active:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+            
         >
         </textarea>
         <InputError :message="form.errors.message" class="mt-2" />
 
         <PrimaryButton 
             :disabled="form.processing" 
-            class="mt-2 bg-rose-500 dark:bg-emerald-600 dark:text-white"
+            class="mt-2 bg-rose-500 dark:bg-emerald-600 dark:text-black"
         >
             {{ form.processing ? 'Enviando...' : 'Chirps' }}
         </PrimaryButton>
