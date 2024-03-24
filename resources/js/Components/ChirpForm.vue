@@ -3,6 +3,7 @@
     import InputError from '@/Components/InputError.vue'
     import PrimaryButton from '@/Components/PrimaryButton.vue'
     import SecondaryButton from '@/Components/SecondaryButton.vue'
+    import __ from "@/Hooks/useTranslation.js";
 
     const { chirp } = defineProps({
         chirp: {
@@ -23,7 +24,6 @@
     }
 
     function submit() {
-
         if (chirp?.id) {
             update(chirp.id)
             
@@ -44,7 +44,7 @@
     <form @submit.prevent="submit">
         <textarea
             v-model="form.message"
-            placeholder="What's on your mind?"
+            :placeholder="__('What\'s on your mind?')"
             class="block w-full rounded-md border-gray-700 focus:border-none bg-white dark:bg-gray-800 text-black dark:text-gray-200 shadow-sm focus:bg-white dark:focus:bg-gray-800 active:bg-white dark:active:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
             
         >

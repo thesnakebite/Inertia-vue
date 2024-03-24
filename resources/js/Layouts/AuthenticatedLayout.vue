@@ -6,6 +6,8 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import __ from "@/Hooks/useTranslation.js";
+
 
 const showingNavigationDropdown = ref(false);
 
@@ -80,9 +82,11 @@ console.log(page.props.status)
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('profile.edit')">
+                                            {{ __('Profile') }}
+                                        </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
+                                            {{ __('Log Out')}}
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
